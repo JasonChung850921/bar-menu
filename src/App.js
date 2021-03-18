@@ -1,78 +1,23 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import { makeStyles } from "@material-ui/core/styles";
+import { Tab } from "semantic-ui-react";
 import "./App.scss";
+import "semantic-ui-css/semantic.min.css";
 import Reservation from "./components/Reservation";
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-
-const App = () => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-        >
-          <Tab label="訂位" {...a11yProps(0)} />
-          <Tab label="點餐" {...a11yProps(1)} />
-          <Tab label="結帳" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
+const panes = [
+  {
+    menuItem: "訂位",
+    render: () => (
+      <Tab.Pane>
         <Reservation />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-    </div>
-  );
+      </Tab.Pane>
+    ),
+  },
+  { menuItem: "點餐", render: () => <Tab.Pane>Tab 2 Content</Tab.Pane> },
+  { menuItem: "結帳", render: () => <Tab.Pane>Tab 3 Content</Tab.Pane> },
+];
+const App = () => {
+  return <Tab panes={panes} />;
 };
 
 export default App;
