@@ -1,0 +1,350 @@
+{
+  "-MBoplIkOZ1WCVMnk_Mu": {
+    "Price": "200",
+    "ProductId": "1",
+    "ProductName": "琴費茲",
+    "Type": "經典"
+  },
+  "-MBoplIn2I2SXxQotVwC": {
+    "Price": "200",
+    "ProductId": "2",
+    "ProductName": "琴通寧",
+    "Type": "經典"
+  },
+  "-MBoplIoddUDZTRmb7j_": {
+    "Price": "200",
+    "ProductId": "3",
+    "ProductName": "莫斯科騾子",
+    "Type": "經典"
+  },
+  "-MBoplIp5Xka0eHNgKBG": {
+    "Price": "250",
+    "ProductId": "4",
+    "ProductName": "長島冰茶",
+    "Type": "經典"
+  },
+  "-MBoplIp5Xka0eHNgKBH": {
+    "Price": "250",
+    "ProductId": "5",
+    "ProductName": "威士忌酸酒",
+    "Type": "經典"
+  },
+  "-MBoplIq3qTJFKjE-xpJ": {
+    "Price": "250",
+    "ProductId": "6",
+    "ProductName": "杏仁酸酒",
+    "Type": "經典"
+  },
+  "-MBoplIq3qTJFKjE-xpK": {
+    "Price": "250",
+    "ProductId": "7",
+    "ProductName": "老式經典",
+    "Type": "經典"
+  },
+  "-MBoplIq3qTJFKjE-xpL": {
+    "Price": "250",
+    "ProductId": "8",
+    "ProductName": "側車",
+    "Type": "經典"
+  },
+  "-MBoplIry7Kx5J3FlLjL": {
+    "Price": "180",
+    "ProductId": "9",
+    "ProductName": "戴綺麗",
+    "Type": "經典"
+  },
+  "-MBoplIry7Kx5J3FlLjM": {
+    "Price": "200",
+    "ProductId": "10",
+    "ProductName": "綠色蚱蜢",
+    "Type": "經典"
+  },
+  "-MBoplIsDZgg-dOfIG5k": {
+    "Price": "300",
+    "ProductId": "11",
+    "ProductName": "野格炸彈",
+    "Type": "經典"
+  },
+  "-MBoplIsDZgg-dOfIG5l": {
+    "Price": "300",
+    "ProductId": "12",
+    "ProductName": "大吉嶺香水",
+    "Type": "特調"
+  },
+  "-MBoplIsDZgg-dOfIG5m": {
+    "Price": "350",
+    "ProductId": "13",
+    "ProductName": "初戀少女",
+    "Type": "特調"
+  },
+  "-MBoplItPUyVJG1qlrd0": {
+    "Price": "250",
+    "ProductId": "14",
+    "ProductName": "和式烏龍茶",
+    "Type": "特調"
+  },
+  "-MBoplItPUyVJG1qlrd1": {
+    "Price": "250",
+    "ProductId": "15",
+    "ProductName": "台北燈火",
+    "Type": "特調"
+  },
+  "-MBoplItPUyVJG1qlrd2": {
+    "Price": "250",
+    "ProductId": "16",
+    "ProductName": "酒心巧克力",
+    "Type": "特調"
+  },
+  "-MBoplIuMfy8xqi13TID": {
+    "Price": "250",
+    "ProductId": "17",
+    "ProductName": "瑪露連",
+    "Type": "特調"
+  },
+  "-MBoplIuMfy8xqi13TIE": {
+    "Price": "300",
+    "ProductId": "18",
+    "ProductName": "二代長島",
+    "Type": "特調"
+  },
+  "-MBoplIuMfy8xqi13TIF": {
+    "Price": "350",
+    "ProductId": "19",
+    "ProductName": "方丈內格羅尼",
+    "Type": "特調"
+  },
+  "-MBoplIuMfy8xqi13TIG": {
+    "Price": "300",
+    "ProductId": "20",
+    "ProductName": "薄荷糖",
+    "Type": "特調"
+  },
+  "-MBoplIvf08UCyFGwn5E": {
+    "Price": "200",
+    "ProductId": "21",
+    "ProductName": "妹子野格",
+    "Type": "特調"
+  },
+  "-MBoplIvf08UCyFGwn5F": {
+    "Price": "250",
+    "ProductId": "22",
+    "ProductName": "波本文藝復興",
+    "Type": "特調"
+  },
+  "-MBoplIvf08UCyFGwn5G": {
+    "Price": "400",
+    "ProductId": "23",
+    "ProductName": "巨型長島",
+    "Type": "特調"
+  },
+  "-MBoplIwkn0MH3Ai55V8": {
+    "Price": "250",
+    "ProductId": "24",
+    "ProductName": "三重夢幻",
+    "Type": "特調"
+  },
+  "-MBoplIwkn0MH3Ai55V9": {
+    "Price": "250",
+    "ProductId": "25",
+    "ProductName": "可樂糖",
+    "Type": "特調"
+  },
+  "-MBoplIwkn0MH3Ai55VA": {
+    "Price": "300",
+    "ProductId": "26",
+    "ProductName": "墨西哥荔枝",
+    "Type": "特調"
+  },
+  "-MBoplIwkn0MH3Ai55VB": {
+    "Price": "300",
+    "ProductId": "27",
+    "ProductName": "戀愛物語",
+    "Type": "特調"
+  },
+  "-MBoplIxNgif1jkFpYLN": {
+    "Price": "300",
+    "ProductId": "28",
+    "ProductName": "豆漿男爵",
+    "Type": "特調"
+  },
+  "-MBoplIxNgif1jkFpYLO": {
+    "Price": "300",
+    "ProductId": "29",
+    "ProductName": "血腥查理",
+    "Type": "特調"
+  },
+  "-MBoplIxNgif1jkFpYLP": {
+    "Price": "300",
+    "ProductId": "30",
+    "ProductName": "紅茶交響曲",
+    "Type": "特調"
+  },
+  "-MBoplIxNgif1jkFpYLQ": {
+    "Price": "300",
+    "ProductId": "31",
+    "ProductName": "一抹茶香",
+    "Type": "特調"
+  },
+  "-MBoplIygssaZbWElYua": {
+    "Price": "250",
+    "ProductId": "32",
+    "ProductName": "250元特調",
+    "Type": "特調"
+  },
+  "-MBoplJ-fh10aK0QkioZ": {
+    "Price": "300",
+    "ProductId": "33",
+    "ProductName": "300元特調",
+    "Type": "特調"
+  },
+  "-MBoplJ-fh10aK0Qkio_": {
+    "Price": "350",
+    "ProductId": "34",
+    "ProductName": "350元特調",
+    "Type": "特調"
+  },
+  "-MBoplJ0zhCmnP9lDg3U": {
+    "Price": "400",
+    "ProductId": "35",
+    "ProductName": "400元特調",
+    "Type": "特調"
+  },
+  "-MBoplJ0zhCmnP9lDg3V": {
+    "Price": "300",
+    "ProductId": "36",
+    "ProductName": "趕進度專用",
+    "Type": "Shots"
+  },
+  "-MBoplJ1EvxNlDcMPoZs": {
+    "Price": "300",
+    "ProductId": "37",
+    "ProductName": "花果香",
+    "Type": "Shots"
+  },
+  "-MBoplJ3tLqCVXEZnoiN": {
+    "Price": "50",
+    "ProductId": "38",
+    "ProductName": "50元Shots",
+    "Type": "Shots"
+  },
+  "-MBoplJ4EDvfEvt_HCXA": {
+    "Price": "100",
+    "ProductId": "39",
+    "ProductName": "100元Shots",
+    "Type": "Shots"
+  },
+  "-MBoplJ4EDvfEvt_HCXB": {
+    "Price": "120",
+    "ProductId": "40",
+    "ProductName": "精釀啤酒",
+    "Type": "啤酒"
+  },
+  "-MBoplJ5Obn8axLy54WM": {
+    "Price": "90",
+    "ProductId": "41",
+    "ProductName": "可樂",
+    "Type": "無酒精"
+  },
+  "-MBoplJ5Obn8axLy54WN": {
+    "Price": "90",
+    "ProductId": "42",
+    "ProductName": "薑汁汽水",
+    "Type": "無酒精"
+  },
+  "-MBoplJ5Obn8axLy54WO": {
+    "Price": "90",
+    "ProductId": "43",
+    "ProductName": "氣泡水",
+    "Type": "無酒精"
+  },
+  "-MBoplJ6rHAMgmtsdhBH": {
+    "Price": "90",
+    "ProductId": "44",
+    "ProductName": "奧利多水",
+    "Type": "無酒精"
+  },
+  "-MBoplJ6rHAMgmtsdhBI": {
+    "Price": "100",
+    "ProductId": "45",
+    "ProductName": "鮮奶",
+    "Type": "無酒精"
+  },
+  "-MBoplJ7DOIA5ZQgAeyC": {
+    "Price": "100",
+    "ProductId": "46",
+    "ProductName": "脆薯",
+    "Type": "點心"
+  },
+  "-MC5U8v71tlKPlXHBoLj": {
+    "Price": "200",
+    "ProductId": "47",
+    "ProductName": "200元特調",
+    "Type": "無酒精"
+  },
+  "-MCS17SXIIWbYy7oaRjK": {
+    "Price": "350",
+    "ProductId": "48",
+    "ProductName": "草本長島冰茶",
+    "Type": "特調"
+  },
+  "-MCS17Scdq-xV1GmIVJl": {
+    "Price": "250",
+    "ProductId": "49",
+    "ProductName": "莓果幻夢",
+    "Type": "特調"
+  },
+  "-MCS17Sf89GJ6xCvPqFU": {
+    "Price": "250",
+    "ProductId": "50",
+    "ProductName": "巧克力牛奶",
+    "Type": "特調"
+  },
+  "-MCS17Sg1UV_FKWeh24P": {
+    "Price": "250",
+    "ProductId": "51",
+    "ProductName": "野格雄鹿",
+    "Type": "特調"
+  },
+  "-MCS17Sg1UV_FKWeh24Q": {
+    "Price": "250",
+    "ProductId": "52",
+    "ProductName": "接骨木魔杖",
+    "Type": "特調"
+  },
+  "-MCS17Sh-T4t_QIilI3Q": {
+    "Price": "250",
+    "ProductId": "53",
+    "ProductName": "奧丁的小葡萄",
+    "Type": "特調"
+  },
+  "-MI-6U-By6hUUHD8wEv_": {
+    "Price": "300",
+    "ProductId": "54",
+    "ProductName": "杏仁冰茶",
+    "Type": "特調"
+  },
+  "-MI-6wGzj86RcPFl4gw5": {
+    "Price": "300",
+    "ProductId": "55",
+    "ProductName": "伯爵冰茶",
+    "Type": "特調"
+  },
+  "-MI-6wTVCwNmgNhoK-Z8": {
+    "Price": "350",
+    "ProductId": "56",
+    "ProductName": "極光冰茶",
+    "Type": "特調"
+  },
+  "-MI-6weptI6pdlNhMXCH": {
+    "Price": "300",
+    "ProductId": "57",
+    "ProductName": "晚霞冰茶",
+    "Type": "特調"
+  },
+  "-MI-6wq-yFrik7uTl9rU": {
+    "Price": "300",
+    "ProductId": "58",
+    "ProductName": "蘋果冰茶",
+    "Type": "特調"
+  }
+}
