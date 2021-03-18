@@ -8,7 +8,7 @@ const panes = [
   {
     menuItem: "訂位",
     render: () => (
-      <Tab.Pane className="m-0" attached={false}>
+      <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
         <Reservation />
       </Tab.Pane>
     ),
@@ -16,7 +16,7 @@ const panes = [
   {
     menuItem: "點餐",
     render: () => (
-      <Tab.Pane className="m-0" attached={false}>
+      <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
         Tab 2 Content
       </Tab.Pane>
     ),
@@ -24,7 +24,7 @@ const panes = [
   {
     menuItem: "結帳",
     render: () => (
-      <Tab.Pane className="m-0" attached={false}>
+      <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
         Tab 3 Content
       </Tab.Pane>
     ),

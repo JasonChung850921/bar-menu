@@ -10,9 +10,32 @@ body {
   width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
+  background-color: #eee !important;
 }
 
 .app {
   background: #eee;
   height: 75vh;
+}
+
+.ui {
+  &.card {
+    width: 100% !important;
+  }
+
+  &.segment {
+    box-shadow: none !important;
+    border-bottom: none !important;
+  }
+
+  &.small {
+    &.modal {
+      width: 100% !important;
+      margin: 0 !important;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
 }
