@@ -1,15 +1,18 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.ui {
-  &.attached {
-    &.tabular {
-      &.menu {
-        display: flex;
-        justify-content: space-around;
-        margin-left: 1rem !important;
-      }
-    }
-  }
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.app {
+  background: #eee;
+  height: 75vh;
 }
