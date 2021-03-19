@@ -1,1 +1,1 @@
-export const baseUrl = "http://192.168.50.238:1337";
+export const baseUrl = "https://warm-caverns-76487.herokuapp.com/";
