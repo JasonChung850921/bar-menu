@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form as FormikForm, Field } from "formik";
 import format from "date-fns/format";
 import {
@@ -29,16 +29,30 @@ const Reservation = () => {
     numCustomers: Yup.number().required("...請輸入"),
   });
 
+  useEffect(() => {
+    apis.get.reservations().then((res) => {
+      const inCompleteReservations = res.data.filter(
+        (data) => data.completed === false
+      );
+      inCompleteReservations.forEach((reservation) => {
+        console.log(reservation);
+        setConfirmationCard((prevState) => {
+          const newState = [...prevState, addConfirmation(reservation)];
+          return newState;
+        });
+      });
+    });
+  }, []);
+
   const addConfirmation = (data) => {
     const {
-      data: {
-        number_of_customers,
-        customer_name,
-        id,
-        reservation_time,
-        table_type,
-      },
+      number_of_customers,
+      customer_name,
+      id,
+      reservation_time,
+      table_type,
     } = data;
+
     return (
       <Card
         key={id}
@@ -62,21 +76,19 @@ const Reservation = () => {
   };
 
   const deleteSelectedConfirmation = () => {
-    const {
-      data: { id },
-    } = toBeDeleted;
+    const { id } = toBeDeleted;
     const updatedData = {
       completed: true,
     };
 
     apis.put.reservations(updatedData, id).then((_) => {
-      confirmationCard &&
-        setConfirmationCard((prevState) => {
-          const state = [...prevState];
-          return state.filter((state) => {
-            return state.key !== id;
-          });
+      setConfirmationCard((prevState) => {
+        const state = [...prevState];
+        const updatedState = state.filter((state) => {
+          return state.key !== id;
         });
+        return updatedState;
+      });
       setModal(false);
     });
   };
@@ -99,10 +111,10 @@ const Reservation = () => {
         };
         apis.post.reservations(data).then((res) => {
           setModal(false);
-          setConfirmationCard((prevState) => [
-            ...prevState,
-            addConfirmation(res),
-          ]);
+          setConfirmationCard((prevState) => {
+            const newState = [...prevState, addConfirmation(res.data)];
+            return newState;
+          });
         });
       }}
     >
