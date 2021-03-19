@@ -3,14 +3,18 @@ import apis from "../api/apis";
 import { Button, Form, Input, Radio, Select } from "semantic-ui-react";
 
 const Order = () => {
-  const [table, setTable] = useState([]);
-  const [radio, setRadio] = useState();
+  const [tables, setTables] = useState([]);
+  const [table, setTable] = useState();
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState();
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [quantity, setQuantity] = useState("1");
 
   useEffect(() => {
     apis.get.tables().then((res) => {
-      setTable(res.data);
+      setTables(res.data);
+      setTable(res.data[0].id);
     });
     apis.get.categories().then((res) => {
       setCategories(
@@ -24,8 +28,24 @@ const Order = () => {
     });
   }, []);
 
-  const handleChange = (_, { value }) => setRadio(value);
+  const handleSubmit = () => {
+    console.log(
+      "categoryID",
+      selectedCategory,
+      "productID",
+      selectedProduct,
+      "tableID",
+      table,
+      "quantity",
+      quantity
+    );
+  };
+
+  const handleChange = (_, { value }) => setTable(value);
+  const handleProductChange = (productId) => setSelectedProduct(productId);
+
   const handleCategoryChange = (categoryId) => {
+    setSelectedCategory(categoryId);
     categories.forEach((category) => {
       if (category.key === categoryId) {
         setProducts(
@@ -42,18 +62,18 @@ const Order = () => {
   };
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group widths="equal">
         <Form.Group inline>
           <label>桌名: </label>
-          {table &&
-            table.map((table) => (
+          {tables &&
+            tables.map((tableOption) => (
               <Form.Field
-                key={table.id}
+                key={tableOption.id}
                 control={Radio}
-                label={table.table_name}
-                value={table.id}
-                checked={radio === table.id}
+                label={tableOption.table_name}
+                value={tableOption.id}
+                checked={table === tableOption.id}
                 onChange={handleChange}
               />
             ))}
@@ -66,16 +86,34 @@ const Order = () => {
           placeholder="種類"
         />
         <Form.Field
+          onChange={(_, { value }) => handleProductChange(value)}
           control={Select}
           options={products}
           placeholder="選擇餐點種類..."
         />
       </Form.Group>
       <Form.Group widths="equal">
-        <Form.Field control={Input} label="Last name" placeholder="Last name" />
+        <Form.Field
+          onChange={(_, { value }) => setQuantity(value)}
+          control={Input}
+          type="number"
+          label="數量"
+          defaultValue="1"
+          placeholder="數量..."
+        />
       </Form.Group>
-      <Form.Field color="teal" control={Button}>
-        Submit
+      <Form.Field
+        color="teal"
+        type="submit"
+        disabled={
+          selectedCategory === undefined ||
+          selectedProduct === undefined ||
+          table === undefined ||
+          quantity === undefined
+        }
+        control={Button}
+      >
+        送出
       </Form.Field>
     </Form>
   );

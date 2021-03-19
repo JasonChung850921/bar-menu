@@ -117,7 +117,16 @@ const Reservation = () => {
         });
       }}
     >
-      {({ isSubmitting, getFieldProps, handleSubmit, errors, touched }) => {
+      {({
+        isSubmitting,
+        getFieldProps,
+        handleSubmit,
+        errors,
+        touched,
+        values,
+      }) => {
+        console.log(values);
+
         return (
           <Grid textAlign="center" className="app">
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -201,7 +210,11 @@ const Reservation = () => {
                     />
                   </Form.Group>
                   <Button
-                    disabled={isSubmitting}
+                    disabled={
+                      values.name === "" ||
+                      values.numCustomers === "" ||
+                      isSubmitting
+                    }
                     className={isSubmitting ? "loading mt-3" : "mt-3"}
                     color="teal"
                     fluid
