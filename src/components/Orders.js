@@ -23,7 +23,7 @@ const Order = () => {
     <Grid textAlign="center">
       <Grid.Column style={{ maxWidth: 450 }}>
         {orders.map((order) => (
-          <Segment>
+          <Segment key={order.id}>
             <Feed>
               <Feed.Event>
                 <Feed.Content>

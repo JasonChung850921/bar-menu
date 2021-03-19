@@ -67,6 +67,13 @@ const apis = {
       });
     },
   },
+  delete: {
+    order_item: (id) =>
+      api({
+        method: "DELETE",
+        url: `${baseUrl}/order-items/${id}`,
+      }),
+  },
 };
 
 export default apis;

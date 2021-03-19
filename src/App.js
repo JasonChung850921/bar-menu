@@ -5,6 +5,7 @@ import "semantic-ui-css/semantic.min.css";
 import Reservation from "./components/Reservation";
 import OrderItem from "./components/OrderItem";
 import Orders from "./components/Orders";
+import Statistics from "./components/Statistics";
 
 const panes = [
   {
@@ -35,7 +36,7 @@ const panes = [
     menuItem: "分析",
     render: () => (
       <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
-        開發中...
+        <Statistics />
       </Tab.Pane>
     ),
   },

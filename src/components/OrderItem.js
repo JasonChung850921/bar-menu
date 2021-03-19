@@ -28,6 +28,7 @@ const Order = () => {
       setTables(res.data);
       setTable(res.data[0].id);
     });
+
     apis.get.categories().then((res) => {
       setCategories(
         res.data.map((category) => ({
@@ -38,12 +39,14 @@ const Order = () => {
         }))
       );
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmitOrderItem = () => {
     const data = {
       quantity,
       product: [selectedProduct],
+      table: [table],
     };
 
     apis.post.order_item(data).then((res) => {
@@ -54,7 +57,18 @@ const Order = () => {
     });
   };
 
-  const handleChange = (_, { value }) => setTable(value);
+  const handleSubmitAsOrder = () => {
+    const data = {
+      order_items: orderItemCard.map((orderItem) => orderItem.key),
+      table: [table],
+    };
+    apis.post.orders(data).then((_) => {
+      setModal(false);
+      setOrderItemCard([]);
+    });
+  };
+
+  const handleTableChange = (_, { value }) => setTable(value);
   const handleProductChange = (productId) => setSelectedProduct(productId);
 
   const handleCategoryChange = (categoryId) => {
@@ -74,37 +88,22 @@ const Order = () => {
     });
   };
 
-  const getTableName = (tableId) => {
-    const table = tables.find((table) => table.id === tableId);
-    return table.table_name;
-  };
-
   const addConfirmation = (data) => {
     const {
       id,
       product: { price, product_name },
       quantity,
+      table: { table_name },
     } = data;
     return (
       <Card key={id}>
         <Card.Content>
-          <Card.Header content={`桌名：${getTableName(table)}`} />
+          <Card.Header content={`桌名：${table_name}`} />
           <Card.Meta content={`數量：${quantity}, 單價：${price}`} />
           <Card.Description content={product_name} />
         </Card.Content>
       </Card>
     );
-  };
-
-  const handleSubmitAsOrder = () => {
-    const data = {
-      order_items: orderItemCard.map((orderItem) => orderItem.key),
-      table: [table],
-    };
-    apis.post.orders(data).then((_) => {
-      setModal(false);
-      setOrderItemCard([]);
-    });
   };
 
   return (
@@ -122,7 +121,7 @@ const Order = () => {
                     label={tableOption.table_name}
                     value={tableOption.id}
                     checked={table === tableOption.id}
-                    onChange={handleChange}
+                    onChange={handleTableChange}
                   />
                 ))}
             </Form.Group>
@@ -153,7 +152,7 @@ const Order = () => {
           <Form.Group>
             <Form.Field
               color="teal"
-              onClick={handleSubmit}
+              onClick={handleSubmitOrderItem}
               disabled={
                 selectedCategory === undefined ||
                 selectedProduct === undefined ||
@@ -176,7 +175,7 @@ const Order = () => {
               }
               control={Button}
             >
-              完成此桌餐點
+              {"完成此桌餐點"}
             </Form.Field>
           </Form.Group>
         </Form>
