@@ -3,6 +3,7 @@ import { Tab } from "semantic-ui-react";
 import "./App.scss";
 import "semantic-ui-css/semantic.min.css";
 import Reservation from "./components/Reservation";
+import Order from "./components/Order";
 
 const panes = [
   {
@@ -17,7 +18,7 @@ const panes = [
     menuItem: "點餐",
     render: () => (
       <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
-        Tab 2 Content
+        <Order />
       </Tab.Pane>
     ),
   },

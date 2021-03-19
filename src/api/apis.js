@@ -18,6 +18,16 @@ const apis = {
         method: "GET",
         url: `${baseUrl}/reservations`,
       }),
+    tables: () =>
+      api({
+        method: "GET",
+        url: `${baseUrl}/tables`,
+      }),
+    categories: () =>
+      api({
+        method: "GET",
+        url: `${baseUrl}/categories`,
+      }),
   },
   put: {
     reservations: (updatedData, id) =>
