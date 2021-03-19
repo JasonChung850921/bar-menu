@@ -23,10 +23,18 @@ const panes = [
     ),
   },
   {
-    menuItem: "結帳",
+    menuItem: "未完成餐點",
     render: () => (
       <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
         Tab 3 Content
+      </Tab.Pane>
+    ),
+  },
+  {
+    menuItem: "結帳",
+    render: () => (
+      <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
+        Tab 4 Content
       </Tab.Pane>
     ),
   },
