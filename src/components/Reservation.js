@@ -35,7 +35,6 @@ const Reservation = () => {
         (data) => data.completed === false
       );
       inCompleteReservations.forEach((reservation) => {
-        console.log(reservation);
         setConfirmationCard((prevState) => {
           const newState = [...prevState, addConfirmation(reservation)];
           return newState;
