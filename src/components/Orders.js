@@ -52,7 +52,7 @@ const Order = () => {
                     </Feed.Summary>
                     <Feed.Extra text>
                       {order.order_items.map((item) => (
-                        <div>
+                        <div key={item.id}>
                           <span>- {item.product?.product_name}</span>
                           {"    "}
                           <span
