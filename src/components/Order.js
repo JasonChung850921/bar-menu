@@ -171,7 +171,8 @@ const Order = () => {
                 selectedCategory === undefined ||
                 selectedProduct === undefined ||
                 table === undefined ||
-                quantity === undefined
+                quantity === undefined ||
+                orderItemCard.length <= 0
               }
               control={Button}
             >
