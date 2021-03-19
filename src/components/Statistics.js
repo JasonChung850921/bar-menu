@@ -18,7 +18,8 @@ const Statistics = () => {
 
   useEffect(() => {
     apis.get.orders().then((res) => {
-      const totalRev = res.data.reduce((total, order) => {
+      const completedOrderse = res.data.filter((order) => order.completed);
+      const totalRev = completedOrderse.reduce((total, order) => {
         return (total += getOrderProfit(order));
       }, 0);
       setRevenue(totalRev);

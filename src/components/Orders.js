@@ -21,15 +21,17 @@ const Order = () => {
   };
 
   const completeOrder = () => {
-    apis.put.orders({ completed: true }, currentOrder.id).then((_) => {
-      setOrders((prevState) => {
-        const state = [...prevState];
-        const updatedState = state.filter((state) => {
-          return state.key === currentOrder.id;
+    apis.put
+      .orders({ completed: true, paid_time: new Date() }, currentOrder.id)
+      .then((_) => {
+        setOrders((prevState) => {
+          const state = [...prevState];
+          const updatedState = state.filter((state) => {
+            return state.key === currentOrder.id;
+          });
+          return updatedState;
         });
-        return updatedState;
       });
-    });
     setModal(false);
   };
 
