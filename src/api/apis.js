@@ -36,6 +36,13 @@ const apis = {
         url: `${baseUrl}/reservations/${id}`,
         data: updatedData,
       }),
+    orders: (data, id) => {
+      return api({
+        method: "PUT",
+        url: `${baseUrl}/orders/${id}`,
+        data,
+      });
+    },
   },
   post: {
     products: (data) => {
