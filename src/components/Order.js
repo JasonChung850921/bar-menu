@@ -102,19 +102,34 @@ const Order = () => {
           placeholder="數量..."
         />
       </Form.Group>
-      <Form.Field
-        color="teal"
-        type="submit"
-        disabled={
-          selectedCategory === undefined ||
-          selectedProduct === undefined ||
-          table === undefined ||
-          quantity === undefined
-        }
-        control={Button}
-      >
-        送出
-      </Form.Field>
+      <Form.Group>
+        <Form.Field
+          color="teal"
+          type="submit"
+          disabled={
+            selectedCategory === undefined ||
+            selectedProduct === undefined ||
+            table === undefined ||
+            quantity === undefined
+          }
+          control={Button}
+        >
+          送出
+        </Form.Field>
+        <Form.Field
+          color="blue"
+          type="submit"
+          disabled={
+            selectedCategory === undefined ||
+            selectedProduct === undefined ||
+            table === undefined ||
+            quantity === undefined
+          }
+          control={Button}
+        >
+          加點
+        </Form.Field>
+      </Form.Group>
     </Form>
   );
 };
