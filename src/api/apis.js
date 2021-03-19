@@ -52,6 +52,13 @@ const apis = {
         data,
       });
     },
+    order_item: (data) => {
+      return api({
+        method: "POST",
+        url: `${baseUrl}/order-items`,
+        data,
+      });
+    },
     reservations: (data) => {
       return api({
         method: "POST",

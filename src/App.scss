@@ -23,6 +23,15 @@ body {
     width: 100% !important;
   }
 
+  &.basic {
+    &.modal {
+      & > .content {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+
   &.segment {
     box-shadow: none !important;
     border-bottom: none !important;

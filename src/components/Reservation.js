@@ -5,13 +5,12 @@ import {
   Grid,
   Segment,
   Button,
-  Header,
   Form,
   Card,
   Modal,
   Icon,
 } from "semantic-ui-react";
-import DateFnsUtils from "@date-io/date-fns"; // choose your lib
+import DateFnsUtils from "@date-io/date-fns";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import locale from "date-fns/locale/zh-TW";
 import * as Yup from "yup";
@@ -125,14 +124,9 @@ const Reservation = () => {
         touched,
         values,
       }) => {
-        console.log(values);
-
         return (
           <Grid textAlign="center" className="app">
             <Grid.Column style={{ maxWidth: 450 }}>
-              <Header as="h1" icon color="teal" textAlign="center">
-                訂位
-              </Header>
               <Form as={FormikForm} onSubmit={handleSubmit} size="large">
                 <Segment>
                   <Field
