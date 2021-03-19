@@ -9,7 +9,6 @@ const Order = () => {
 
   useEffect(() => {
     apis.get.orders().then((res) => {
-      console.log(res.data);
       setOrders(res.data.filter((order) => !order.completed));
     });
   }, []);
@@ -30,7 +29,7 @@ const Order = () => {
                 <Feed.Content>
                   <Feed.Summary>
                     {`桌名：${order.table?.table_name}`}
-                    <Feed.Date>{`送出時間：${format(
+                    <Feed.Date>{`點餐時間：${format(
                       new Date(order.published_at),
                       "yyyy-MM-dd HH:mm"
                     )}`}</Feed.Date>
@@ -38,27 +37,41 @@ const Order = () => {
                   <Feed.Extra text>
                     {order.order_items.map((item) => (
                       <div>
-                        <span>{item.product?.product_name}</span>
+                        <span>- {item.product?.product_name}</span>
                         {"    "}
                         <span
                           style={{ fontWeight: "bolder" }}
                         >{`${item.quantity}   `}</span>
                         <span>個</span>
+                        <div style={{ clear: "both" }} />
+                        <br />
                       </div>
                     ))}
                   </Feed.Extra>
                   <Feed.Meta>
-                    <Feed.Like>
+                    <Feed.Like
+                      style={{
+                        fontWeight: "bolder",
+                        color: "black",
+                        fontSize: 20,
+                      }}
+                    >
                       <Icon name="dollar" />
                       {getOrderProfit(order)} {"  "}總金額
                     </Feed.Like>
-                    <Button
-                      style={{ marginLeft: 200 }}
-                      color="red"
-                      onClick={() => {}}
-                    >
-                      付完錢了
-                    </Button>
+                    <div style={{ display: "inline-block", marginLeft: 120 }}>
+                      <Button color="blue" disabled onClick={() => {}}>
+                        加點
+                      </Button>
+                      <Button
+                        color="red"
+                        onClick={() => {
+                          setModal(true);
+                        }}
+                      >
+                        付完錢了
+                      </Button>
+                    </div>
                   </Feed.Meta>
                 </Feed.Content>
               </Feed.Event>
@@ -74,7 +87,7 @@ const Order = () => {
           centered
         >
           <Modal.Content>
-            <p>確定要完成這餐點嗎？</p>
+            <p>付錢了嗎？</p>
           </Modal.Content>
           <Modal.Actions>
             <Button basic color="red" inverted onClick={() => setModal(false)}>

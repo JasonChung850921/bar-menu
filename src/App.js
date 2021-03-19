@@ -24,7 +24,7 @@ const panes = [
     ),
   },
   {
-    menuItem: "未完成餐點",
+    menuItem: "未結帳餐點",
     render: () => (
       <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
         <Orders />
@@ -32,10 +32,10 @@ const panes = [
     ),
   },
   {
-    menuItem: "結帳",
+    menuItem: "分析",
     render: () => (
       <Tab.Pane className="m-0" style={{ background: "#eee" }} attached={false}>
-        Tab 4 Content
+        開發中...
       </Tab.Pane>
     ),
   },
