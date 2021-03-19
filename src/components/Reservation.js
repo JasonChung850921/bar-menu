@@ -128,6 +128,7 @@ const Reservation = () => {
                 <Segment>
                   <Field
                     {...getFieldProps("name")}
+                    autoComplete="off"
                     error={
                       errors.name &&
                       touched.name && {
@@ -145,6 +146,7 @@ const Reservation = () => {
                   />
                   <Field
                     {...getFieldProps("numCustomers")}
+                    autoComplete="off"
                     error={
                       errors.numCustomers &&
                       touched.numCustomers && {
