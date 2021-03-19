@@ -30,21 +30,31 @@ const Reservation = () => {
   });
 
   const addConfirmation = (data) => {
+    const {
+      data: {
+        number_of_customers,
+        customer_name,
+        id,
+        reservation_time,
+        table_type,
+      },
+    } = data;
     return (
       <Card
-        key={data.customer_name + data.number_of_customers}
+        key={id}
         onClick={() => {
           setModal(true);
           setToBeDeleted(data);
         }}
       >
         <Card.Content>
-          <Card.Header content={data.customer_name} />
-          <Card.Meta content={data.number_of_customers + "人"} />
+          <Card.Header content={customer_name} />
+          <Card.Meta content={number_of_customers + " 人"} />
           <Card.Description
-            content={`時間: ${format(startDate, "yyyy-MM-dd HH:mm")}, 桌型: ${
-              radio === "sm" ? "小桌" : "大桌"
-            }`}
+            content={`時間: ${format(
+              new Date(reservation_time),
+              "yyyy-MM-dd HH:mm"
+            )}, 桌型: ${table_type === "sm" ? "小桌" : "大桌"}`}
           />
         </Card.Content>
       </Card>
@@ -52,15 +62,23 @@ const Reservation = () => {
   };
 
   const deleteSelectedConfirmation = () => {
-    const { customer_name, number_of_customers } = toBeDeleted;
-    confirmationCard &&
-      setConfirmationCard((prevState) => {
-        const state = [...prevState];
-        return state.filter((state) => {
-          return state.key !== customer_name + number_of_customers;
+    const {
+      data: { id },
+    } = toBeDeleted;
+    const updatedData = {
+      completed: true,
+    };
+
+    apis.put.reservations(updatedData, id).then((_) => {
+      confirmationCard &&
+        setConfirmationCard((prevState) => {
+          const state = [...prevState];
+          return state.filter((state) => {
+            return state.key !== id;
+          });
         });
-      });
-    setModal(false);
+      setModal(false);
+    });
   };
 
   return (
@@ -79,12 +97,12 @@ const Reservation = () => {
           reservation_time: startDate,
           table_type: radio,
         };
-        setConfirmationCard((prevState) => [
-          ...prevState,
-          addConfirmation(data),
-        ]);
         apis.post.reservations(data).then((res) => {
           setModal(false);
+          setConfirmationCard((prevState) => [
+            ...prevState,
+            addConfirmation(res),
+          ]);
         });
       }}
     >
