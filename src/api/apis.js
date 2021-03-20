@@ -1,5 +1,5 @@
 import api from "./index";
-import { baseUrl } from "./config";
+import baseUrl from "./config";
 
 const apis = {
   get: {
