@@ -68,6 +68,9 @@ const Statistics = () => {
         )}
       </Statistic.Group>
       <Divider />
+      <div className="mb-4" style={{ fontWeight: "bolder" }}>
+        總共售出數量統計:
+      </div>
       <Statistic.Group widths="two" size="small">
         {quantitySold &&
           quantitySold.map((item) => (
