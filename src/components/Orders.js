@@ -27,7 +27,7 @@ const Order = () => {
         setOrders((prevState) => {
           const state = [...prevState];
           const updatedState = state.filter((state) => {
-            return state.key === currentOrder.id;
+            return state.id !== currentOrder.id;
           });
           return updatedState;
         });

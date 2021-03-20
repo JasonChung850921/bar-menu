@@ -8,10 +8,11 @@ const apis = {
         method: "GET",
         url: `${baseUrl}/products`,
       }),
-    orders: () =>
+    orders: (params = {}) =>
       api({
         method: "GET",
         url: `${baseUrl}/orders`,
+        params,
       }),
     reservations: () =>
       api({
@@ -28,6 +29,12 @@ const apis = {
         method: "GET",
         url: `${baseUrl}/categories`,
       }),
+    order_item: () => {
+      return api({
+        method: "GET",
+        url: `${baseUrl}/order-items`,
+      });
+    },
   },
   put: {
     reservations: (updatedData, id) =>
