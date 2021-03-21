@@ -22,8 +22,18 @@ const Order = () => {
   const [quantity, setQuantity] = useState();
   const [orderItemCard, setOrderItemCard] = useState([]);
   const [modal, setModal] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
+    apis.get.orders({ paid: false }).then((res) => console.log(res.data));
+    apis.get.order_item({ sent_to_order: false }).then((res) => {
+      res.data.forEach((item) => {
+        setOrderItemCard((prevState) => [
+          ...prevState,
+          addConfirmationCard(item),
+        ]);
+      });
+    });
     apis.get.tables().then((res) => {
       setTables(res.data);
       setTable(res.data[0].id);
@@ -39,31 +49,52 @@ const Order = () => {
         }))
       );
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmitOrderItem = () => {
     const data = {
       quantity,
-      product: [selectedProducts],
-      table: [table],
+      product: selectedProducts,
+      table: table,
     };
 
     apis.post.order_item(data).then((res) => {
       setOrderItemCard((prevState) => {
-        const newOrder = [...prevState, addConfirmation(res.data)];
+        const newOrder = [...prevState, addConfirmationCard(res.data)];
         return newOrder;
       });
     });
   };
 
+  const cancelOrderItem = (orderItemId) => {
+    apis.delete.order_item(orderItemId).then((res) => {
+      setOrderItemCard((prevState) => {
+        const state = [...prevState];
+        const filteredState = state.filter((item) => item.key !== res.data.id);
+        return filteredState;
+      });
+    });
+  };
+
   const handleSubmitAsOrder = () => {
-    const data = {
-      order_items: orderItemCard.map((orderItem) => orderItem.key),
-      table: [table],
-    };
-    apis.post.orders(data).then((_) => {
+    const { id } = modalData;
+    apis.put.order_item({ sent_to_order: true }, id).then((res) => {
       setModal(false);
-      setOrderItemCard([]);
+      setOrderItemCard((prevState) => {
+        const state = [...prevState];
+        const updatedState = state.filter((item) => item.key !== id);
+        return updatedState;
+      });
+
+      const data = {
+        order_items: [res.data.id],
+        table: res.data.table.id,
+        completed: true,
+      };
+      apis.post.orders(data).then((res) => {
+        console.log(res.data);
+      });
     });
   };
 
@@ -87,7 +118,12 @@ const Order = () => {
     });
   };
 
-  const addConfirmation = (data) => {
+  const openModalWithData = (data) => {
+    setModal(true);
+    setModalData(data);
+  };
+
+  const addConfirmationCard = (data) => {
     const {
       id,
       product: { price, product_name },
@@ -102,20 +138,12 @@ const Order = () => {
           <Card.Description content={product_name} />
           <Card.Content extra>
             <div className="ui two buttons">
-              <Button
-                color="teal"
-                onClick={() => setModal(true)}
-                disabled={
-                  selectedCategory === undefined ||
-                  selectedProducts === undefined ||
-                  table === undefined ||
-                  quantity === undefined ||
-                  orderItemCard.length <= 0
-                }
-              >
-                {"完成此桌餐點"}
+              <Button color="teal" onClick={() => openModalWithData(data)}>
+                完成餐點
               </Button>
-              <Button color="red">取消</Button>
+              <Button onClick={() => cancelOrderItem(id)} color="red">
+                取消
+              </Button>
             </div>
           </Card.Content>
         </Card.Content>
@@ -181,34 +209,35 @@ const Order = () => {
             </Form.Field>
           </Form.Group>
         </Form>
-        <Modal
-          basic
-          onClose={() => setModal(false)}
-          onOpen={() => setModal(true)}
-          open={modal}
-          size="small"
-          centered
-        >
-          <Modal.Content>
-            <p>確定要完成這桌餐點嗎？</p>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button basic color="red" inverted onClick={() => setModal(false)}>
-              <Icon name="remove" /> No
-            </Button>
-            <Button
-              color="green"
-              inverted
-              onClick={() => {
-                handleSubmitAsOrder();
-              }}
-            >
-              <Icon name="checkmark" /> Yes
-            </Button>
-          </Modal.Actions>
-        </Modal>
         {orderItemCard && orderItemCard}
       </Grid.Column>
+
+      <Modal
+        basic
+        onClose={() => setModal(false)}
+        onOpen={() => setModal(true)}
+        open={modal}
+        size="small"
+        centered
+      >
+        <Modal.Content>
+          <p>確定要完成這桌餐點嗎？</p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button basic color="red" inverted onClick={() => setModal(false)}>
+            <Icon name="remove" /> No
+          </Button>
+          <Button
+            color="green"
+            inverted
+            onClick={() => {
+              handleSubmitAsOrder();
+            }}
+          >
+            <Icon name="checkmark" /> Yes
+          </Button>
+        </Modal.Actions>
+      </Modal>
     </Grid>
   );
 };

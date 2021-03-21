@@ -29,10 +29,11 @@ const apis = {
         method: "GET",
         url: `${baseUrl}/categories`,
       }),
-    order_item: () => {
+    order_item: (params = {}) => {
       return api({
         method: "GET",
         url: `${baseUrl}/order-items`,
+        params,
       });
     },
   },
@@ -47,6 +48,13 @@ const apis = {
       return api({
         method: "PUT",
         url: `${baseUrl}/orders/${id}`,
+        data,
+      });
+    },
+    order_item: (data, id) => {
+      return api({
+        method: "PUT",
+        url: `${baseUrl}/order-items/${id}`,
         data,
       });
     },

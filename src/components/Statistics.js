@@ -15,7 +15,7 @@ const Statistics = () => {
   };
 
   useEffect(() => {
-    apis.get.order_item().then((res) => {
+    apis.get.order_item({ sent_to_order: true }).then((res) => {
       const items = res.data.map((item) => {
         return {
           name: item.product.product_name,

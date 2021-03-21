@@ -10,7 +10,7 @@ const Order = () => {
 
   useEffect(() => {
     apis.get.orders().then((res) => {
-      setOrders(res.data.filter((order) => !order.completed));
+      setOrders(res.data.filter((order) => order.completed));
     });
   }, [modal]);
 
@@ -22,7 +22,7 @@ const Order = () => {
 
   const completeOrder = () => {
     apis.put
-      .orders({ completed: true, paid_time: new Date() }, currentOrder.id)
+      .orders({ paid: true, paid_time: new Date() }, currentOrder.id)
       .then((_) => {
         setOrders((prevState) => {
           const state = [...prevState];
