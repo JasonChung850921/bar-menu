@@ -77,10 +77,7 @@ const Order = () => {
                         <Icon name="dollar" />
                         {getOrderProfit(order)} {"  "}總金額
                       </Feed.Like>
-                      <div style={{ display: "inline-block", marginLeft: 120 }}>
-                        <Button color="blue" disabled onClick={() => {}}>
-                          加點
-                        </Button>
+                      <div style={{ display: "inline-block", marginLeft: 170 }}>
                         <Button
                           color="red"
                           onClick={() => {

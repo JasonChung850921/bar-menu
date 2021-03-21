@@ -60,12 +60,12 @@ const Statistics = () => {
   return (
     <Container>
       <Statistic.Group widths="one" size="large">
-        {revenue !== 0 && (
+        {
           <Statistic>
             <Statistic.Value>${revenue}</Statistic.Value>
             <Statistic.Label>當日營業額</Statistic.Label>
           </Statistic>
-        )}
+        }
       </Statistic.Group>
       <Divider />
       <div

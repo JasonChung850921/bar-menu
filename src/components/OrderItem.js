@@ -17,9 +17,9 @@ const Order = () => {
   const [table, setTable] = useState();
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState();
+  const [selectedProducts, setSelectedProducts] = useState();
   const [selectedCategory, setSelectedCategory] = useState();
-  const [quantity, setQuantity] = useState("1");
+  const [quantity, setQuantity] = useState();
   const [orderItemCard, setOrderItemCard] = useState([]);
   const [modal, setModal] = useState(false);
 
@@ -39,13 +39,12 @@ const Order = () => {
         }))
       );
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSubmitOrderItem = () => {
     const data = {
       quantity,
-      product: [selectedProduct],
+      product: [selectedProducts],
       table: [table],
     };
 
@@ -69,7 +68,7 @@ const Order = () => {
   };
 
   const handleTableChange = (_, { value }) => setTable(value);
-  const handleProductChange = (productId) => setSelectedProduct(productId);
+  const handleProductChange = (productId) => setSelectedProducts(productId);
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId);
@@ -101,6 +100,24 @@ const Order = () => {
           <Card.Header content={`桌名：${table_name}`} />
           <Card.Meta content={`數量：${quantity}, 單價：${price}`} />
           <Card.Description content={product_name} />
+          <Card.Content extra>
+            <div className="ui two buttons">
+              <Button
+                color="teal"
+                onClick={() => setModal(true)}
+                disabled={
+                  selectedCategory === undefined ||
+                  selectedProducts === undefined ||
+                  table === undefined ||
+                  quantity === undefined ||
+                  orderItemCard.length <= 0
+                }
+              >
+                {"完成此桌餐點"}
+              </Button>
+              <Button color="red">取消</Button>
+            </div>
+          </Card.Content>
         </Card.Content>
       </Card>
     );
@@ -145,7 +162,6 @@ const Order = () => {
               control={Input}
               type="number"
               label="數量"
-              defaultValue="1"
               placeholder="數量..."
             />
           </Form.Group>
@@ -155,27 +171,13 @@ const Order = () => {
               onClick={handleSubmitOrderItem}
               disabled={
                 selectedCategory === undefined ||
-                selectedProduct === undefined ||
+                selectedProducts === undefined ||
                 table === undefined ||
                 quantity === undefined
               }
               control={Button}
             >
               加入餐點
-            </Form.Field>
-            <Form.Field
-              color="red"
-              onClick={() => setModal(true)}
-              disabled={
-                selectedCategory === undefined ||
-                selectedProduct === undefined ||
-                table === undefined ||
-                quantity === undefined ||
-                orderItemCard.length <= 0
-              }
-              control={Button}
-            >
-              {"完成此桌餐點"}
             </Form.Field>
           </Form.Group>
         </Form>
