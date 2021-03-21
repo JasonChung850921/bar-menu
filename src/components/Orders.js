@@ -9,10 +9,10 @@ const Order = () => {
   const [currentOrder, setCurrentOrder] = useState();
 
   useEffect(() => {
-    apis.get.orders().then((res) => {
+    apis.get.orders({ paid: false }).then((res) => {
       setOrders(res.data.filter((order) => order.completed));
     });
-  }, [modal]);
+  }, []);
 
   const getOrderProfit = (order) => {
     return order.order_items.reduce((totalAll, item) => {
