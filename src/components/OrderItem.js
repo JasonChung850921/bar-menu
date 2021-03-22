@@ -79,23 +79,25 @@ const Order = () => {
 
   const handleSubmitAsOrder = () => {
     const { id } = modalData;
-    apis.put.order_item({ sent_to_order: true }, id).then((res) => {
-      setModal(false);
-      setOrderItemCard((prevState) => {
-        const state = [...prevState];
-        const updatedState = state.filter((item) => item.key !== id);
-        return updatedState;
-      });
+    apis.put
+      .order_item({ sent_to_order: true, paid: false }, id)
+      .then((res) => {
+        setModal(false);
+        setOrderItemCard((prevState) => {
+          const state = [...prevState];
+          const updatedState = state.filter((item) => item.key !== id);
+          return updatedState;
+        });
 
-      // const data = {
-      //   order_items: [res.data.id],
-      //   table: res.data.table.id,
-      //   completed: true,
-      // };
-      // apis.post.orders(data).then((res) => {
-      //   // console.log(res.data);
-      // });
-    });
+        // const data = {
+        //   order_items: [res.data.id],
+        //   table: res.data.table.id,
+        //   completed: true,
+        // };
+        // apis.post.orders(data).then((res) => {
+        //   // console.log(res.data);
+        // });
+      });
   };
 
   const handleTableChange = (_, { value }) => setTable(value);

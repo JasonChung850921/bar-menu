@@ -19,9 +19,8 @@ const Order = () => {
   }, []);
 
   const addToCurrentTable = (orderInfo) => {
-    console.log(orderInfo);
     apis.get
-      .order_item({ sent_to_order: true, added_to_order: false })
+      .order_item({ sent_to_order: true, paid: false, added_to_order: false })
       .then((res) => {
         const orderItems = res.data;
         if (!orderItems.length) {
@@ -63,7 +62,7 @@ const Order = () => {
 
   const changeTables = () => {
     apis.get
-      .order_item({ sent_to_order: true, added_to_order: false })
+      .order_item({ sent_to_order: true, paid: false, added_to_order: false })
       .then((res) => {
         const orderItems = res.data;
         const orderItemsObj = orderItems.reduce((obj, item) => {
@@ -128,6 +127,28 @@ const Order = () => {
     setModal(false);
   };
 
+  const payForIndividualItem = (orderItem, orderId) => {
+    const orderItemId = orderItem.id;
+    apis.put.order_item({ paid: true }, orderItemId).then((_) => {
+      setOrders((prevState) => {
+        const state = [...prevState];
+        const order = state.filter((orderState) => orderState.id === orderId);
+        const filteredOrders = state.filter(
+          (orderState) => orderState.id !== orderId
+        );
+
+        const filteredOrderItems = order[0].order_items;
+        filteredOrderItems.forEach((item) => {
+          if (item.id === orderItemId) {
+            item.paid = true;
+          }
+        });
+        order[0].order_items = filteredOrderItems;
+        return [...filteredOrders, ...order];
+      });
+    });
+  };
+
   return (
     <Grid textAlign="center">
       <Grid.Column style={{ maxWidth: 450 }}>
@@ -152,13 +173,27 @@ const Order = () => {
                     </Feed.Summary>
                     <Feed.Extra text>
                       {order.order_items.map((item) => (
-                        <div key={item.id}>
+                        <div
+                          style={
+                            item.paid ? { textDecoration: "line-through" } : {}
+                          }
+                          key={item.id}
+                        >
                           <span>- {item.product?.product_name}</span>
                           {"    "}
                           <span
                             style={{ fontWeight: "bolder" }}
                           >{`${item.quantity}   `}</span>
                           <span>個</span>
+                          {item.paid === false && (
+                            <Button
+                              className="mx-4"
+                              color="teal"
+                              onClick={() =>
+                                payForIndividualItem(item, order.id)
+                              }
+                            >{`$${item.product.price}`}</Button>
+                          )}
                           <div style={{ clear: "both" }} />
                           <br />
                         </div>
