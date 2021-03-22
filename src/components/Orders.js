@@ -144,7 +144,7 @@ const Order = () => {
           }
         });
         order[0].order_items = filteredOrderItems;
-        return [...filteredOrders, ...order];
+        return [...order, ...filteredOrders];
       });
     });
   };
@@ -192,7 +192,7 @@ const Order = () => {
                               onClick={() =>
                                 payForIndividualItem(item, order.id)
                               }
-                            >{`$${item.product.price}`}</Button>
+                            >{`付：$${item.product.price}`}</Button>
                           )}
                           <div style={{ clear: "both" }} />
                           <br />
