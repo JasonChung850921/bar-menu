@@ -30,9 +30,14 @@ const Reservation = () => {
 
   useEffect(() => {
     apis.get.reservations().then((res) => {
-      const inCompleteReservations = res.data.filter(
-        (data) => data.completed === false
-      );
+      const inCompleteReservations = res.data
+        .filter((data) => data.completed === false)
+        .sort(
+          (a, b) =>
+            new Date(a.reservation_time).getTime() -
+            new Date(b.reservation_time).getTime()
+        );
+
       inCompleteReservations.forEach((reservation) => {
         setConfirmationCard((prevState) => {
           const newState = [...prevState, addConfirmation(reservation)];
