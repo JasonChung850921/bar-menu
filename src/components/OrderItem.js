@@ -25,7 +25,6 @@ const Order = () => {
   const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
-    apis.get.orders({ paid: false }).then((res) => console.log(res.data));
     apis.get.order_item({ sent_to_order: false }).then((res) => {
       res.data.forEach((item) => {
         setOrderItemCard((prevState) => [
@@ -54,17 +53,18 @@ const Order = () => {
 
   const handleSubmitOrderItem = () => {
     const data = {
-      quantity,
+      quantity: 1,
       product: selectedProducts,
       table: table,
     };
-
-    apis.post.order_item(data).then((res) => {
-      setOrderItemCard((prevState) => {
-        const newOrder = [...prevState, addConfirmationCard(res.data)];
-        return newOrder;
+    for (let i = 0; i < quantity; i++) {
+      apis.post.order_item(data).then((res) => {
+        setOrderItemCard((prevState) => {
+          const newOrder = [...prevState, addConfirmationCard(res.data)];
+          return newOrder;
+        });
       });
-    });
+    }
   };
 
   const cancelOrderItem = (orderItemId) => {
@@ -87,14 +87,14 @@ const Order = () => {
         return updatedState;
       });
 
-      const data = {
-        order_items: [res.data.id],
-        table: res.data.table.id,
-        completed: true,
-      };
-      apis.post.orders(data).then((res) => {
-        console.log(res.data);
-      });
+      // const data = {
+      //   order_items: [res.data.id],
+      //   table: res.data.table.id,
+      //   completed: true,
+      // };
+      // apis.post.orders(data).then((res) => {
+      //   // console.log(res.data);
+      // });
     });
   };
 

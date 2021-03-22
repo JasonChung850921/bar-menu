@@ -14,6 +14,11 @@ const apis = {
         url: `${baseUrl}/orders`,
         params,
       }),
+    order: (id) =>
+      api({
+        method: "GET",
+        url: `${baseUrl}/orders/${id}`,
+      }),
     reservations: () =>
       api({
         method: "GET",
