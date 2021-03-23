@@ -29,7 +29,7 @@ const Reservation = () => {
   });
 
   useEffect(() => {
-    apis.get.reservations().then((res) => {
+    apis.get.reservations({ completed: false }).then((res) => {
       const inCompleteReservations = res.data
         .filter((data) => data.completed === false)
         .sort(
