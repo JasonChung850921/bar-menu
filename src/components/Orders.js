@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import apis from "../api/apis";
 import format from "date-fns/format";
 import { Button, Modal, Grid, Icon, Feed, Segment } from "semantic-ui-react";
@@ -8,14 +8,21 @@ const Order = () => {
   const [orders, setOrders] = useState([]);
   const [modal, setModal] = useState(false);
   const [currentOrder, setCurrentOrder] = useState();
+  const runAddTables = useRef(false);
 
   useEffect(() => {
     apis.get.orders({ paid: false }).then((res) => {
       const unpaidOrders = res.data;
-      if (unpaidOrders) {
-        setOrders((prevState) => [...prevState, ...unpaidOrders]);
+      if (unpaidOrders.length) {
+        runAddTables.current = true;
+        unpaidOrders.forEach((order) => {
+          addToCurrentTable(order);
+        });
+      } else {
+        addTables();
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addToCurrentTable = (orderInfo) => {
@@ -23,8 +30,19 @@ const Order = () => {
       .order_item({ sent_to_order: true, paid: false, added_to_order: false })
       .then((res) => {
         const orderItems = res.data;
-        if (!orderItems.length) {
-          return;
+        if (
+          !orderItems.length ||
+          !orderItems.find(
+            (item) => item.table.table_name === orderInfo.table.table_name
+          )
+        ) {
+          if (runAddTables.current) {
+            addTables();
+            runAddTables.current = false;
+            return setOrders((prevState) => [...prevState, orderInfo]);
+          } else {
+            return setOrders((prevState) => [...prevState, orderInfo]);
+          }
         }
         const newOrderItems = [];
         orderItems.forEach((orderItem) => {
@@ -46,25 +64,38 @@ const Order = () => {
         apis.put
           .orders({ order_items: order_item_ids }, orderInfo.id)
           .then((res) => {
-            apis.get.order(res.data.id).then((res) => {
-              setOrders((prevState) => {
-                const orders = [...prevState];
-                const updatedOrders = orders.filter(
-                  (order) => order.id !== res.data.id
-                );
-                updatedOrders.push(res.data);
-                return updatedOrders;
+            apis.get
+              .order(res.data.id)
+              .then((res) => {
+                setOrders((prevState) => {
+                  const orders = [...prevState];
+                  const updatedOrders = orders.filter(
+                    (order) => order.id !== res.data.id
+                  );
+                  updatedOrders.push(res.data);
+                  return updatedOrders;
+                });
+              })
+              .then(() => {
+                if (runAddTables.current) {
+                  addTables();
+                }
               });
-            });
           });
       });
   };
 
-  const changeTables = () => {
+  const addTables = () => {
+    runAddTables.current = false;
     apis.get
       .order_item({ sent_to_order: true, paid: false, added_to_order: false })
       .then((res) => {
         const orderItems = res.data;
+
+        if (!orderItems.length) {
+          return;
+        }
+
         const orderItemsObj = orderItems.reduce((obj, item) => {
           if (!obj[item.table.id]) {
             obj[item.table.id] = [item];
@@ -153,11 +184,6 @@ const Order = () => {
     <Grid textAlign="center">
       <Grid.Column style={{ maxWidth: 450 }}>
         {!orders.length && <span className="mx-2">目前沒有...</span>}
-        {
-          <Button color="teal" onClick={() => changeTables()}>
-            計算桌子點餐數量
-          </Button>
-        }
         {orders.length > 0 &&
           orders.map((order) => (
             <Segment key={order.id}>
@@ -210,13 +236,7 @@ const Order = () => {
                         <Icon name="dollar" />
                         {getOrderProfit(order)} {"  "}總金額
                       </Feed.Like>
-                      <div style={{ display: "inline-block", marginLeft: 100 }}>
-                        <Button
-                          color="blue"
-                          onClick={() => addToCurrentTable(order)}
-                        >
-                          加點同桌
-                        </Button>
+                      <div style={{ display: "inline-block", marginLeft: 170 }}>
                         <Button
                           color="red"
                           onClick={() => {
@@ -233,6 +253,12 @@ const Order = () => {
               </Feed>
             </Segment>
           ))}
+        {/* <br />
+        {
+          <Button color="teal" onClick={() => addTables()}>
+            重新計算桌子點餐數量
+          </Button>
+        } */}
         <Modal
           basic
           onClose={() => setModal(false)}

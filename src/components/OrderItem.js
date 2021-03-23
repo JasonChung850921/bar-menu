@@ -88,15 +88,6 @@ const Order = () => {
           const updatedState = state.filter((item) => item.key !== id);
           return updatedState;
         });
-
-        // const data = {
-        //   order_items: [res.data.id],
-        //   table: res.data.table.id,
-        //   completed: true,
-        // };
-        // apis.post.orders(data).then((res) => {
-        //   // console.log(res.data);
-        // });
       });
   };
 
