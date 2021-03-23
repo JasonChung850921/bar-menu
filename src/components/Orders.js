@@ -71,25 +71,30 @@ const Order = () => {
               apis.put
                 .order_item({ added_to_order: true }, itemId)
                 .then((res) => {
-                  console.log(
-                    "added to current table, sent to order true",
-                    res.data
-                  );
+                  // console.log(
+                  //   "added to current table, sent to order true",
+                  //   res.data
+                  // );
                 });
             });
             apis.put
               .orders({ order_items: order_item_ids }, orderInfo.id)
               .then((res) => {
-                apis.get.order(res.data.id).then((res) => {
-                  setOrders((prevState) => {
-                    const orders = [...prevState];
-                    const updatedOrders = orders.filter(
-                      (order) => order.id !== res.data.id
-                    );
-                    updatedOrders.push(res.data);
-                    return updatedOrders;
+                apis.get
+                  .order(res.data.id)
+                  .then((res) => {
+                    setOrders((prevState) => {
+                      const orders = [...prevState];
+                      const updatedOrders = orders.filter(
+                        (order) => order.id !== res.data.id
+                      );
+                      updatedOrders.push(res.data);
+                      return updatedOrders;
+                    });
+                  })
+                  .then((res) => {
+                    setNewTable();
                   });
-                });
               });
           }
         });
@@ -143,7 +148,7 @@ const Order = () => {
           apis.put
             .order_item({ added_to_order: true }, order_item_id)
             .then((res) => {
-              console.log("add tables", res.data);
+              // console.log("add tables", res.data);
             });
         });
         apis.get.order(res.data.id).then((res2) => {
